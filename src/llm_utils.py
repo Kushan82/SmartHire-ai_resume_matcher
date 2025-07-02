@@ -1,7 +1,7 @@
 from openai import OpenAI
  
 client = OpenAI(
-    base_url="https://localhost:11434/v1",
+    base_url="http://localhost:11434/v1",
     api_key="ollama",
 )
 def get_resume_feedback(resume_text, job_description):
