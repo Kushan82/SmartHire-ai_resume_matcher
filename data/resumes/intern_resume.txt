@@ -1,0 +1,17 @@
+John Doe
+Email: john.doe@email.com | Phone: 123-456-7890
+
+EDUCATION
+B.Sc. in Computer Science, XYZ University
+
+SKILLS
+Python, Data Analysis, Excel, SQL, Tableau
+
+PROJECTS
+- Analyzed COVID-19 trends using Python and matplotlib
+- Built a portfolio dashboard using Excel
+
+WORK EXPERIENCE
+Summer Intern at DataCorp
+- Helped automate reports in Excel
+- Assisted senior analysts with data cleaning

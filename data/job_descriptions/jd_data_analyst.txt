@@ -1,0 +1,18 @@
+Job Title: Data Analyst
+
+We are looking for a Data Analyst to join our growing analytics team. The ideal candidate will have experience in working with large datasets, extracting insights, and visualizing them for business users.
+
+Responsibilities:
+- Query large datasets using SQL
+- Build dashboards using Tableau or Power BI
+- Perform A/B testing and statistical analysis
+- Collaborate with business stakeholders to define KPIs
+
+Skills Required:
+- Proficient in SQL and Python
+- Experience with BI tools (Tableau, Power BI)
+- Strong analytical and communication skills
+
+Preferred:
+- Experience with retail or e-commerce data
+- Understanding of machine learning basics
