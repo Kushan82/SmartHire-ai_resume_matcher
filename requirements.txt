@@ -1,0 +1,32 @@
+# === CORE DEPENDENCIES ===
+pandas                          # For structured data handling and dataframes
+numpy                           # Numerical operations and vector handling
+
+# === TEXT EXTRACTION ===
+python-docx                     # Extract text from .docx resumes/JDs
+PyMuPDF                         # High-performance PDF text extraction (faster than pdfminer)
+beautifulsoup4                  # Optional: Clean up messy HTML in resumes or job posts
+
+# === NLP AND TEXT PROCESSING ===
+nltk                            # Tokenization, stopword removal, stemming
+spacy                           # Named Entity Recognition, part-of-speech tagging
+scikit-learn                    # TF-IDF vectorizer, cosine similarity, machine learning models
+sentence-transformers           # Pretrained BERT-based embeddings (for deep semantic similarity)
+
+# === RANKING & MATCHING ===
+faiss-cpu                       # For fast similarity search over large vector spaces
+
+# === FRONTEND (OPTIONAL) ===
+streamlit                       # Easy and fast web app interface (optional but great for demo)
+
+# === UTILITY & LOGGING ===
+tqdm                            # Progress bars during data loading or training
+pyyaml                          # For reading config.yaml
+loguru                          # Cleaner logging instead of print/debug clutter
+
+# === DOWNLOAD MODELS ===
+transformers                    # (Optional) For using or fine-tuning large language models
+pandas
+
+# Keywords It Ticks on a Resume:
+#NLP, machine learning, classification, semantic similarity, text embeddings, scikit-learn, transformers, streamlit, project deployment, end-to-end ML, real-world application
