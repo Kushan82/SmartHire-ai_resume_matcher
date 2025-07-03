@@ -10,20 +10,22 @@ from src.preprocessing import preprocess_text
 from src.matcher import ResumeMatcher
 from src.llm_utils import get_resume_feedback
 
+st.write("✅ Import successful")
+
 st.set_page_config(page_title="SmartHire AI", layout="centered")
 
 st.title("📄 SmartHire: AI Resume Matcher")
 
 # Helper to handle all 3 file types
-def extract_text_from_file(file):
-    if file.name.endswith(".pdf"):
-        return extract_text_from_pdf(file)
-    elif file.name.endswith(".docx"):
-        return extract_text_from_docx(file)
-    elif file.name.endswith(".txt"):
-        return extract_text_from_txt(file)
+def extract_text_from_file(uploaded_file):
+    if uploaded_file.name.endswith(".pdf"):
+        return extract_text_from_pdf(uploaded_file)
+    elif uploaded_file.name.endswith(".docx"):
+        return extract_text_from_docx(uploaded_file)
+    elif uploaded_file.name.endswith(".txt"):
+        return extract_text_from_txt(uploaded_file)
     else:
-        return "❌ Unsupported file type."
+        return "Unsupported file format."
 
 resume_file = st.file_uploader("📎 Upload Resume", type=["pdf", "docx", "txt"])
 job_desc = st.text_area("💼 Paste Job Description", height=300)

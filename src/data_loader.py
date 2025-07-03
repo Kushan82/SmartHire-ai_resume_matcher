@@ -2,22 +2,22 @@ import os
 from typing import Dict
 from docx import Document
 import fitz
+import PyPDF2
 from pathlib import Path
 
-def extract_text_from_pdf(pdf_path: str) -> str:  # Extract text from a PDF file
-    doc = fitz.open(pdf_path)
-    text = ""
-    for page in doc:
-        text += page.get_text()
+def extract_text_from_pdf(uploaded_file):
+    reader = PyPDF2.PdfReader(uploaded_file)
+    text = ''
+    for page in reader.pages:
+        text += page.extract_text() or ''
     return text
 
-def extract_text_from_docx(docx_path: str) -> str:  # Extract text from a DOCX file
-    doc = Document(docx_path)
+def extract_text_from_docx(uploaded_file) -> str:  # Extract text from a DOCX file
+    doc = Document(uploaded_file)
     return "\n".join([para.text for para in doc.paragraphs])
 
-def extract_text_from_txt(txt_path: str) -> str:  # Extract text from a TXT file
-    with open(txt_path, 'r', encoding='utf-8') as f:
-        return f.read()
+def extract_text_from_txt(uploaded_file) -> str:  # Extract text from a TXT file
+    return uploaded_file.read().decode("utf-8")
 
 def load_resumes(folder_path: str) -> Dict[str, str]:
     resume_texts = {}
