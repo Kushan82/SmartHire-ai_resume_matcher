@@ -1,23 +1,20 @@
 import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+import spacy
+from spacy.lang.en.stop_words import STOP_WORDS
 
-nltk.download('punkt')
-nltk.download('stopwords')
+nlp = spacy.load("en_core_web_sm")
 
-stopwords = set(stopwords.words('english'))
+def preprocess_text(text: str) -> str:
+    text = text.lower()  # Lowercase
+    text = re.sub(r'[^a-z\s]', '', text)  # Remove non-alphabetic characters
 
-def preprocess_text(text:str) -> str:
-    text = text.lower()  # Convert to lowercase
+    # Process the text with spaCy
+    doc = nlp(text)
 
-    text= re.sub(r'[^a-z\s]','',text) # Remove non-alphabetic characters
+    # Tokenize and remove stopwords, punctuation, and non-alphabetic tokens
+    filtered_tokens = [
+        token.text for token in doc
+        if token.text not in STOP_WORDS and token.is_alpha
+    ]
 
-    tokens = word_tokenize(text)  # Tokenize the text
-
-    filtered_tokens =[word for word in tokens if word not in stopwords]  # Remove stopwords
-
-    return ' '.join(filtered_tokens)  # Join tokens back into a string
-
-
-    
+    return ' '.join(filtered_tokens)
