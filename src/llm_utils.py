@@ -20,3 +20,27 @@ You are an expert resume reviewer. Your task is to provide feedback on a resume 
         ],
     )
     return response.choices[0].message.content.strip()
+
+def ask_mistral(resume_text, query):
+    prompt = f"""
+You are a helpful assistant helping evaluate resumes.
+
+Given the following resume and question, provide a clear, concise answer based only on the information in the resume.
+
+Resume:
+{resume_text}
+
+Question:
+{query}
+
+Answer:
+"""
+
+    response = client.chat.completions.create(
+        model="mistral",
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+    )
+    return response.choices[0].message.content.strip()
+
