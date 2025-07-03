@@ -47,7 +47,7 @@ if uploaded_files and job_desc:
 
     scores = compute_similarity(resume_texts, jd_cleaned)
 
-    ranked =sorted(zip(resume_names, scores, uploaded_files), key=lambda x: x[1], reverse=True)
+    ranked =sorted(zip(resume_names, scores, uploaded_files, raw_resumes), key=lambda x: x[1], reverse=True)
 
     st.subheader("📊 Ranked Resumes (by Semantic Match)")
     for i, (name, score, file, raw_text) in enumerate(ranked):
