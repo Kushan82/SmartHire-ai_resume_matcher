@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.data_loader import extract_text_from_docx, extract_text_from_pdf, extract_text_from_txt
 from src.preprocessing import preprocess_text
-from src.llm_utils import get_resume_feedback,ask_mistral
+from src.llm_utils import ask_mistral, get_resume_feedback
 from src.semantic_matcher import compute_similarity
 
 st.write("✅ Import successful")
@@ -61,32 +61,33 @@ if uploaded_files and job_desc:
     st.markdown("### 💡 LLM Feedback")
     st.write(feedback)
 
-    # 🔎 Freeform Query Section
-    st.markdown("---")
-    st.subheader("🔎 Ask a Semantic Question (e.g., 'Who has AWS experience?')")
-    query = st.text_input("Enter your question")
+# 🔎 Freeform Query Section
+st.markdown("---")
+st.subheader("🔎 Ask a Semantic Question (e.g., 'Who has AWS experience?')")
 
-    if query:
-        model = SentenceTransformer("all-MiniLM-L6-v2")
-        query_vec = model.encode([query])
-        resume_vecs = model.encode(resume_texts)
+query = st.text_input("Enter your question")
 
-        similarities = cosine_similarity(resume_vecs, query_vec).flatten()
-        ranked_query = sorted(zip(resume_names, similarities, raw_resumes), key=lambda x: x[1], reverse=True)
+if query:
+    model = SentenceTransformer("all-MiniLM-L6-v2")
+    query_vec = model.encode([query])
+    resume_vecs = model.encode(resume_texts)
 
+    similarities = cosine_similarity(resume_vecs, query_vec).flatten()
+    ranked_query = sorted(zip(resume_names, similarities, raw_resumes), key=lambda x: x[1], reverse=True)
 
-        st.markdown("### 🧠 Query Results:")
-        for i, (name, score, file) in enumerate(ranked_query):
-            if score < 0.4:
-                continue
+    st.markdown("### 🧠 Query Results:")
+    for i, (name, score, resume_text) in enumerate(ranked_query):
+        if score < 0.4:
+            continue
 
         st.markdown(f"**{name}** — Relevance: `{score:.2f}`")
         with st.expander("📄 View Resume"):
-            st.text(text[:2000] + ("..." if len(text) > 2000 else ""))
+            st.text(resume_text[:2000] + ("..." if len(resume_text) > 2000 else ""))
 
         if st.button(f"🧠 Ask Mistral about {name}", key=f"mistral_query_{i}"):
             with st.spinner("Thinking with Mistral..."): 
-                response = ask_mistral(text, query)
+                response = ask_mistral(resume_text, query)
                 st.markdown("#### 💬 Mistral's Insight")
                 st.write(response)
+
 
